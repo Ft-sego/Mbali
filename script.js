@@ -19,14 +19,16 @@ startEnvelope.addEventListener("click", () => {
 });
 
 function explodeHearts(x, y) {
-    const hearts = config.floatingEmojis.hearts;
-    for (let i = 0; i < 30; i++) {
+    // Fixed: Use config.floatingEmojis directly (it's an array, not an object with .hearts)
+    const hearts = config.floatingEmojis;
+    // Use config values instead of hardcoding
+    for (let i = 0; i < config.explosionCount; i++) {
         const heart = document.createElement("div");
         heart.className = "explosion-heart";
         heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
 
         const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 250;
+        const distance = Math.random() * config.explosionDistance;
 
         heart.style.left = x + "px";
         heart.style.top = y + "px";
@@ -34,7 +36,8 @@ function explodeHearts(x, y) {
         heart.style.setProperty("--y", Math.sin(angle) * distance + "px");
 
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 1000);
+        // Use config duration for removal
+        setTimeout(() => heart.remove(), config.explosionDuration);
     }
 }
 
