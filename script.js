@@ -1,3 +1,4 @@
+const CONFIG = window.VALENTINE_CONFIG;
 const config = window.VALENTINE_CONFIG;
 
 /* START SCREEN LOGIC */
